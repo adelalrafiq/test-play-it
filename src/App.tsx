@@ -1,18 +1,21 @@
 import "./App.css";
-import Login from "./Login";
-import CoursesList from "./CoursesList";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PrivateRoutes from "./routes/PrivateRoutes";
+import Login from "./pages/Login";
+import CoursesList from "./pages/CoursesList";
 
 function App() {
 	return (
 		<div className="App">
-      
-			<Routes>
-				<Route path="/" element={<Login />} />				
-				<Route path="/courses" element={<CoursesList  />} />
-			</Routes>
+			<BrowserRouter>
+				<Routes>					
+					<Route path="/" element={<Login />} />
+					<Route element={<PrivateRoutes />} >
+						<Route path="/courses" element={<CoursesList />}  />
+					</Route>
+				</Routes>
+				</BrowserRouter>
 		</div>
 	);
 }
-
 export default App;

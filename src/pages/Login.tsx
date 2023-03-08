@@ -10,24 +10,19 @@ import {
 } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../utils/helpers";
 
 const URL_AUTH = process.env.REACT_APP_URL_AUTH;
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();	
-	const handleLogin = async () => {       
-		let user = { email, password };
-		let result = await fetch(`${URL_AUTH}`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "*/*",
-			},
-			body: JSON.stringify(user),
-		});
-		result = await result.json();
-		localStorage.setItem("userInfo", JSON.stringify(result));
+	const handleLogin = async () => { 	
+		let response = await login(email, password);
+		response = await response.json();
+		console.log({response});
+		document.cookie = `myCookie=${JSON.stringify(response)}; path=/;`
+		localStorage.setItem("userDetails", JSON.stringify(response));		
 		navigate("/courses");
 	};
 	return (
@@ -58,7 +53,7 @@ export default function Login() {
 							The number 1 game-based learning platform
 						</Typography>
 					</Grid>
-					<Grid item xs={12}>
+					<Grid item xs={12}>					
 						<FormControl fullWidth variant="standard">
 							<InputLabel htmlFor="email">Email address</InputLabel>
 							<Input id="email" type="email" onChange={(e) => setEmail(e.target.value)} />
@@ -73,7 +68,7 @@ export default function Login() {
 							color="warning"
 							label="LOGIN"                           
 						/>
-                       </Button>
+                       </Button>					 
 					</Grid>
 				</Grid>
 			</Box>

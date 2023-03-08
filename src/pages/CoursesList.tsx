@@ -14,6 +14,12 @@ import {
 	Toolbar,
 	Grid,
 	Link,
+	Dialog,
+	DialogTitle,
+	Box,
+	AppBar,
+	Tabs,
+	Tab,
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import axios from "axios";
@@ -59,7 +65,7 @@ const CoursesList = () => {
 	useEffect(() => {
 		const fetchCourses = async () => {
 			try {
-				let user = JSON.parse(localStorage.getItem("userInfo") as string);
+				let user = JSON.parse(localStorage.getItem("userDetails") as string);
 				const token = user.jwt.token;
 				const organizationsId = user.organizationIDs[0];
 				const api = `${URL}/${organizationsId}/categories?expand=courses&language=en`;
@@ -146,8 +152,8 @@ const CoursesList = () => {
 									.sort((a, b) => (a.name > b.name ? 1 : -1))
 									.map((category) => (
 										<React.Fragment key={category.id}>
-											<TableRow>
-												<TableCell padding="none">
+											<TableRow sx={{ borderBottom: "none" }}>
+												<TableCell style={{ margin: 0, padding: 0 }}>
 													<IconButton
 														aria-label="expand row"
 														size="small"
@@ -160,7 +166,7 @@ const CoursesList = () => {
 														)}
 													</IconButton>
 												</TableCell>
-												<TableCell padding="none">
+												<TableCell  padding="none" align="left">
 													<Checkbox
 														color="warning"
 														checked={category.courses.every((course) =>
@@ -179,7 +185,12 @@ const CoursesList = () => {
 														}
 													/>
 												</TableCell>
-												<TableCell padding="none">{category.name}</TableCell>
+												<TableCell
+													sx={{ "&:hover": { cursor: "pointer" } }}
+													padding="none"
+												>
+													<Typography variant="h6">{category.name}</Typography>
+												</TableCell>
 												<TableCell align="right" padding="none">
 													<Switch color="warning" />
 												</TableCell>
@@ -187,8 +198,9 @@ const CoursesList = () => {
 											<TableRow>
 												<TableCell
 													padding="none"
-													style={{ paddingBottom: 0, paddingTop: 0 }}
+													style={{ margin: 0, padding: 0 }}
 													colSpan={4}
+													
 												>
 													<Collapse
 														style={{ margin: 0, padding: 0 }}
@@ -203,7 +215,7 @@ const CoursesList = () => {
 																	.map((course) => (
 																		<TableRow key={course.id}>
 																			<TableCell />
-																			<TableCell>
+																			<TableCell colSpan={1}>
 																				<Checkbox
 																					color="warning"
 																					checked={checked.includes(course.id)}
@@ -212,18 +224,20 @@ const CoursesList = () => {
 																					}
 																				/>
 																			</TableCell>
-																			<TableCell key={course.id}>
-																				<Link
-																					style={linkStyle}
-																					onMouseOver={handleMouseOver}
-																					onMouseOut={handleMouseOut}
-																					underline="hover"
-																					component="button"
-																					variant="body2"
+																			<TableCell key={course.id} colSpan={4}>
+																				<Typography
+																					variant="h6"
+																					sx={{
+																						"&:hover": {
+																							color: "orange",
+																							textDecoration: "underline",
+																							cursor: "pointer",
+																						},
+																					}}
 																					onClick={handleClickOpenDialog}
 																				>
 																					{course.level}. {course.name}
-																				</Link>
+																				</Typography>
 																			</TableCell>
 																			<TableCell align="right">
 																				<Switch color="warning" />
@@ -242,6 +256,42 @@ const CoursesList = () => {
 					</TableContainer>
 				</Grid>
 			</Grid>
+			{openDialog && (
+				<Dialog
+					data-test-id="dialog"
+					open={true}
+					onClose={handleClose}
+					maxWidth="md"
+					fullWidth
+					scroll="paper"
+					aria-labelledby="form-dialog-title"
+				>
+					<DialogTitle
+						data-test-id="dialog-title"
+						sx={{ backgroundColor: "#E0E0E0", color: "primary" }}
+						id="form-dialog-title"
+					>
+						Basic Reanimation:
+					</DialogTitle>
+					<Box>
+						<AppBar
+							position="static"
+						>
+							<Tabs
+								orientation="horizontal"
+								value={''}
+								//onChange={''}
+								indicatorColor="primary"
+								textColor="inherit"
+								aria-label="full width tabs example"
+							>
+								<Tab label={'item'} />;							
+							</Tabs>
+						</AppBar>
+						
+					</Box>
+				</Dialog>
+			)}
 		</>
 	);
 };
