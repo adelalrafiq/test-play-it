@@ -1,7 +1,5 @@
 import {
 	Box,
-	Button,
-	Chip,
 	Fab,
 	FormControl,
 	Grid,
@@ -9,11 +7,10 @@ import {
 	InputLabel,
 	Typography,
 } from "@mui/material";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../utils/helpers";
 
-const URL_AUTH = process.env.REACT_APP_URL_AUTH;
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");

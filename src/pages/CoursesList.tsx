@@ -13,7 +13,6 @@ import {
 	Typography,
 	Toolbar,
 	Grid,
-	Link,
 	Dialog,
 	DialogTitle,
 	Box,
@@ -287,8 +286,7 @@ const CoursesList = () => {
 							>
 								<Tab label={'item'} />;							
 							</Tabs>
-						</AppBar>
-						
+						</AppBar>						
 					</Box>
 				</Dialog>
 			)}
