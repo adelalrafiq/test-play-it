@@ -2,6 +2,7 @@ import {
 	Box,
 	Button,
 	Chip,
+	Fab,
 	FormControl,
 	Grid,
 	Input,
@@ -16,13 +17,13 @@ const URL_AUTH = process.env.REACT_APP_URL_AUTH;
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const navigate = useNavigate();	
-	const handleLogin = async () => { 	
+	const navigate = useNavigate();
+	const handleLogin = async () => {
 		let response = await login(email, password);
 		response = await response.json();
-		console.log({response});
-		document.cookie = `myCookie=${JSON.stringify(response)}; path=/;`
-		localStorage.setItem("userDetails", JSON.stringify(response));		
+		console.log({ response });
+		document.cookie = `myCookie=${JSON.stringify(response)}; path=/;`;
+		localStorage.setItem("userDetails", JSON.stringify(response));
 		navigate("/courses");
 	};
 	return (
@@ -53,22 +54,32 @@ export default function Login() {
 							The number 1 game-based learning platform
 						</Typography>
 					</Grid>
-					<Grid item xs={12}>					
+					<Grid item xs={12}>
 						<FormControl fullWidth variant="standard">
 							<InputLabel htmlFor="email">Email address</InputLabel>
-							<Input id="email" type="email" onChange={(e) => setEmail(e.target.value)} />
+							<Input
+								id="email"
+								type="email"
+								onChange={(e) => setEmail(e.target.value)}
+							/>
 						</FormControl>
 						<FormControl margin="normal" fullWidth variant="standard">
 							<InputLabel htmlFor="password">Password</InputLabel>
-							<Input id="password" type="password" onChange={(e) => setPassword(e.target.value)} />
+							<Input
+								id="password"
+								type="password"
+								onChange={(e) => setPassword(e.target.value)}
+							/>
 						</FormControl>
-                      <Button fullWidth  onClick={handleLogin}>                       
-						<Chip
-							sx={{width: "100%"}}
+						<Fab
+							size="medium"
 							color="warning"
-							label="LOGIN"                           
-						/>
-                       </Button>					 
+							onClick={handleLogin}
+							variant="extended"
+							sx={{ width: "100%" }}
+						>
+							Login
+						</Fab>					
 					</Grid>
 				</Grid>
 			</Box>
