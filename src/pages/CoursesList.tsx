@@ -42,18 +42,8 @@ const CoursesList = () => {
 	const [open, setOpen] = useState<number[]>([]);
 	const [categories, setCategories] = useState<Categories[]>([]);
 	const [loading, setLoading] = useState(true);
-	const [hovered, setHovered] = useState(false);
 	const [openDialog, setOpenDialog] = React.useState(false);
 
-	const handleMouseOver = () => {
-		setHovered(true);
-	};
-	const handleMouseOut = () => {
-		setHovered(false);
-	};
-	const linkStyle = {
-		color: hovered ? "#fc9900" : "#000",
-	};
 	const handleClickOpenDialog = () => {
 		setOpenDialog(true);
 	};
@@ -123,7 +113,7 @@ const CoursesList = () => {
 			<Grid
 				container
 				spacing={0}
-				direction="row"
+				direction="column"
 				alignItems="center"
 				justifyContent="center"
 				style={{ width: "50%", margin: "auto" }}
@@ -137,11 +127,11 @@ const CoursesList = () => {
 					<TableContainer>
 						<Table>
 							<TableHead>
-								<TableRow>
+								<TableRow>									
+									<TableCell padding="none" />									
 									<TableCell padding="none" />
 									<TableCell padding="none" />
-									<TableCell padding="none" />
-									<TableCell align="right" padding="none" variant="head">
+									<TableCell align="right"  padding="none" variant="head">
 										Off/On
 									</TableCell>
 								</TableRow>
@@ -151,9 +141,10 @@ const CoursesList = () => {
 									.sort((a, b) => (a.name > b.name ? 1 : -1))
 									.map((category) => (
 										<React.Fragment key={category.id}>
-											<TableRow sx={{ borderBottom: "none" }}>
-												<TableCell style={{ margin: 0, padding: 0 }}>
-													<IconButton
+											<TableRow >
+												<TableCell sx={{p:0}} >
+													<IconButton	
+													sx={{pl:2,pr:0}}																											
 														aria-label="expand row"
 														size="small"
 														onClick={() => handleCollapse(category.id)}
@@ -165,8 +156,9 @@ const CoursesList = () => {
 														)}
 													</IconButton>
 												</TableCell>
-												<TableCell  padding="none" align="left">
+												<TableCell sx={{pr:0}}>
 													<Checkbox
+													sx={{p:0}}
 														color="warning"
 														checked={category.courses.every((course) =>
 															checked.includes(course.id),
@@ -184,38 +176,36 @@ const CoursesList = () => {
 														}
 													/>
 												</TableCell>
-												<TableCell
-													sx={{ "&:hover": { cursor: "pointer" } }}
-													padding="none"
+												<TableCell 
+													sx={{ pr:20,"&:hover": { cursor: "pointer" } }}
+													
 												>
-													<Typography variant="h6">{category.name}</Typography>
+													<Typography  variant="h6">{category.name}</Typography>
 												</TableCell>
-												<TableCell align="right" padding="none">
+												<TableCell padding="none" align="right" >
 													<Switch color="warning" />
 												</TableCell>
 											</TableRow>
 											<TableRow>
 												<TableCell
-													padding="none"
-													style={{ margin: 0, padding: 0 }}
-													colSpan={4}
-													
+													padding="none"													
+													colSpan={4}													
 												>
 													<Collapse
-														style={{ margin: 0, padding: 0 }}
 														in={open.includes(category.id)}
 														timeout="auto"
 														unmountOnExit
 													>
-														<Table aria-label="purchases">
+														<Table size="small">
 															<TableBody>
 																{category.courses
 																	.sort((a, b) => (a.name > b.name ? 1 : -1))
 																	.map((course) => (
 																		<TableRow key={course.id}>
-																			<TableCell />
-																			<TableCell colSpan={1}>
+																			<TableCell padding="none"/>
+																			<TableCell  sx={{pl:8}} >
 																				<Checkbox
+																				sx={{pr:0}}																				
 																					color="warning"
 																					checked={checked.includes(course.id)}
 																					onChange={(event) =>
@@ -223,7 +213,7 @@ const CoursesList = () => {
 																					}
 																				/>
 																			</TableCell>
-																			<TableCell key={course.id} colSpan={4}>
+																			<TableCell sx={{pr:12}} key={course.id} >
 																				<Typography
 																					variant="h6"
 																					sx={{
@@ -238,7 +228,7 @@ const CoursesList = () => {
 																					{course.level}. {course.name}
 																				</Typography>
 																			</TableCell>
-																			<TableCell align="right">
+																			<TableCell padding="none" align="right">
 																				<Switch color="warning" />
 																			</TableCell>
 																		</TableRow>

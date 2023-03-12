@@ -19,7 +19,7 @@ export default function Login() {
 		let response = await login(email, password);
 		response = await response.json();
 		console.log({ response });
-		document.cookie = `myCookie=${JSON.stringify(response)}; path=/;`;
+		//document.cookie = `myCookie=${JSON.stringify(response)}; path=/;`;
 		localStorage.setItem("userDetails", JSON.stringify(response));
 		navigate("/courses");
 	};
