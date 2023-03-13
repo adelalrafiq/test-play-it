@@ -216,7 +216,7 @@ const CoursesList = () => {
 																			<TableCell sx={{pr:12}} key={course.id} >
 																				<Typography
 																					variant="h6"
-																					sx={{
+																					sx={{width:300,p:2,
 																						"&:hover": {
 																							color: "orange",
 																							textDecoration: "underline",
