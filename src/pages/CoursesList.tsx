@@ -127,11 +127,11 @@ const CoursesList = () => {
 					<TableContainer>
 						<Table>
 							<TableHead>
-								<TableRow>									
-									<TableCell padding="none" />									
+								<TableRow>
 									<TableCell padding="none" />
 									<TableCell padding="none" />
-									<TableCell align="right"  padding="none" variant="head">
+									<TableCell padding="none" />
+									<TableCell align="right" padding="none" variant="head">
 										Off/On
 									</TableCell>
 								</TableRow>
@@ -141,10 +141,10 @@ const CoursesList = () => {
 									.sort((a, b) => (a.name > b.name ? 1 : -1))
 									.map((category) => (
 										<React.Fragment key={category.id}>
-											<TableRow >
-												<TableCell sx={{p:0}} >
-													<IconButton	
-													sx={{pl:2,pr:1}}																											
+											<TableRow>
+												<TableCell sx={{ p: 0 }}>
+													<IconButton
+														sx={{ pl: 2, pr: 1 }}
 														aria-label="expand row"
 														size="small"
 														onClick={() => handleCollapse(category.id)}
@@ -156,9 +156,9 @@ const CoursesList = () => {
 														)}
 													</IconButton>
 												</TableCell>
-												<TableCell sx={{pr:0}}>
+												<TableCell sx={{ pr: 0 }}>
 													<Checkbox
-													sx={{pr:6}}
+														sx={{ pr: 6 }}
 														color="warning"
 														checked={category.courses.every((course) =>
 															checked.includes(course.id),
@@ -176,21 +176,19 @@ const CoursesList = () => {
 														}
 													/>
 												</TableCell>
-												<TableCell 
-													sx={{ pr:20,"&:hover": { cursor: "pointer" } }}
-													
+												<TableCell
+													sx={{ pr: 20, "&:hover": { cursor: "pointer" } }}
 												>
-													<Typography sx={{width:300}} variant="h6">{category.name}</Typography>
+													<Typography sx={{ width: 300 }} variant="h6">
+														{category.name}
+													</Typography>
 												</TableCell>
-												<TableCell padding="none" align="right" >
+												<TableCell padding="none" align="right">
 													<Switch color="warning" />
 												</TableCell>
 											</TableRow>
 											<TableRow>
-												<TableCell
-													padding="none"													
-													colSpan={4}													
-												>
+												<TableCell padding="none" colSpan={4}>
 													<Collapse
 														in={open.includes(category.id)}
 														timeout="auto"
@@ -202,10 +200,10 @@ const CoursesList = () => {
 																	.sort((a, b) => (a.name > b.name ? 1 : -1))
 																	.map((course) => (
 																		<TableRow key={course.id}>
-																			<TableCell padding="none"/>
-																			<TableCell  sx={{pl:8}} >
+																			<TableCell padding="none" />
+																			<TableCell sx={{ pl: 8 }}>
 																				<Checkbox
-																				sx={{pr:0}}																				
+																					sx={{ pr: 0 }}
 																					color="warning"
 																					checked={checked.includes(course.id)}
 																					onChange={(event) =>
@@ -213,10 +211,15 @@ const CoursesList = () => {
 																					}
 																				/>
 																			</TableCell>
-																			<TableCell sx={{pr:12}} key={course.id} >
+																			<TableCell
+																				sx={{ pr: 12 }}
+																				key={course.id}
+																			>
 																				<Typography
 																					variant="h6"
-																					sx={{width:300,p:2,
+																					sx={{
+																						width: 300,
+																						p: 2,
 																						"&:hover": {
 																							color: "orange",
 																							textDecoration: "underline",
@@ -263,20 +266,18 @@ const CoursesList = () => {
 						Basic Reanimation:
 					</DialogTitle>
 					<Box>
-						<AppBar
-							position="static"
-						>
+						<AppBar position="static">
 							<Tabs
 								orientation="horizontal"
-								value={''}
+								value={""}
 								//onChange={''}
 								indicatorColor="primary"
 								textColor="inherit"
 								aria-label="full width tabs example"
 							>
-								<Tab label={'item'} />;							
+								<Tab label={"item"} />;
 							</Tabs>
-						</AppBar>						
+						</AppBar>
 					</Box>
 				</Dialog>
 			)}
