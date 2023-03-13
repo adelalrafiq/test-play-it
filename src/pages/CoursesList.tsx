@@ -144,7 +144,7 @@ const CoursesList = () => {
 											<TableRow >
 												<TableCell sx={{p:0}} >
 													<IconButton	
-													sx={{pl:2,pr:0}}																											
+													sx={{pl:2,pr:1}}																											
 														aria-label="expand row"
 														size="small"
 														onClick={() => handleCollapse(category.id)}
@@ -158,7 +158,7 @@ const CoursesList = () => {
 												</TableCell>
 												<TableCell sx={{pr:0}}>
 													<Checkbox
-													sx={{p:0}}
+													sx={{pr:6}}
 														color="warning"
 														checked={category.courses.every((course) =>
 															checked.includes(course.id),
@@ -180,7 +180,7 @@ const CoursesList = () => {
 													sx={{ pr:20,"&:hover": { cursor: "pointer" } }}
 													
 												>
-													<Typography  variant="h6">{category.name}</Typography>
+													<Typography sx={{width:300}} variant="h6">{category.name}</Typography>
 												</TableCell>
 												<TableCell padding="none" align="right" >
 													<Switch color="warning" />
